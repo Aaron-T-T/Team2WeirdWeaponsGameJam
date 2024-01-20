@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+// Created by Aaron Torres
+// Allows the mouse to move and rotate the gun
 public class ArmGunController : MonoBehaviour
 {
     public float moveSpeed = 5f;
