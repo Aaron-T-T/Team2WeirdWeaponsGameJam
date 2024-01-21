@@ -47,20 +47,18 @@ public class ArmGunController : MonoBehaviour
         // Smoothly move the gun towards the target position in the X and Y axes
         transform.position = Vector3.Lerp(transform.position, targetPosition, moveSpeed * Time.deltaTime);
     }
-   void RotateGun(Vector3 targetPosition)
+    void RotateGun(Vector3 targetPosition)
     {
         // Calculate the direction to the target
         Vector3 lookDirection = targetPosition - transform.position;
 
-        // Ensure the lookDirection is not directly along the Z-axis
-        if (lookDirection.normalized != Vector3.forward)
-        {
-            // Calculate the rotation angles
-            float angleX = Mathf.Atan2(lookDirection.y, lookDirection.z) * Mathf.Rad2Deg;
-            float angleY = Mathf.Atan2(lookDirection.x, Mathf.Sqrt(lookDirection.y * lookDirection.y + lookDirection.z * lookDirection.z)) * Mathf.Rad2Deg;
+        // Ignore the -axis rotation
+        lookDirection.z = 0f;
+        //lookDirection.y = 0f;
 
-            // Apply the rotation only along the X and Y axes
-            transform.rotation = Quaternion.Euler(-angleX, angleY, 0f);
-        }
-    }
+
+        // Smoothly rotate the gun to face the mouse cursor
+        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }   
 }
