@@ -10,6 +10,8 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    // Health variable
+    public int health = 100;
     //Public float variables that determines the characters speed, jump force, and fall force
     public float speed;
     public float jumpForce;
@@ -34,6 +36,11 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if(health <= 0)
+        {
+            Debug.Log("Player dead");
+        }
         if(Input.GetKeyDown(KeyCode.Escape)) // If Escaped preseed pause game.
         {
             gameIsPaused = !gameIsPaused;
@@ -113,5 +120,14 @@ public class CharacterMovement : MonoBehaviour
         }
 
     }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"Player health = {health}");
+ 
+    }
+
+
     
 }
