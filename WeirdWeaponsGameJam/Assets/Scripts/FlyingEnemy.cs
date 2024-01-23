@@ -76,12 +76,12 @@ public class FlyingEnemy : MonoBehaviour
         transform.Translate(patrolDirection * patrolSpeed * Time.deltaTime);
 
         // Check if patrol boundaries are reached
-        if (transform.position.x > 5f)
+        if (transform.localPosition.x > 5f)
         {
             // Reached right boundary, switch direction
             patrolDirection = Vector3.left;
         }
-        else if (transform.position.x < -5f)
+        else if (transform.localPosition.x < -5f)
         {
             // Reached left boundary, switch direction
             patrolDirection = Vector3.right;

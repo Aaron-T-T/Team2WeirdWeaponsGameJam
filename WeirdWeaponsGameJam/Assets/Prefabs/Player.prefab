@@ -416,7 +416,8 @@ MonoBehaviour:
   speed: 10
   jumpForce: 70
   fallForce: 40
-  pauseMenu: {fileID: 0}
+  pauseMenu: {fileID: 3017348977590518933, guid: 1cb5443a9f85de147a31c42447537555,
+    type: 3}
 --- !u!135 &2389130690151812285
 SphereCollider:
   m_ObjectHideFlags: 0

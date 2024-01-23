@@ -36,8 +36,16 @@ public class ArmGunController : MonoBehaviour
         // Calculate the direction from the player to the target position
         Vector3 direction = targetPosition - player.position;
 
-        // Constrain the target position within the sphere using the sphere collider's radius
-        targetPosition = player.position + direction.normalized * Mathf.Min(direction.magnitude, player.GetComponent<SphereCollider>().radius);
+        // Use a raycast to check for collisions excluding the gun
+        RaycastHit hit;
+        if (Physics.Raycast(player.position, direction.normalized, out hit, player.GetComponent<SphereCollider>().radius))
+        {
+            if (hit.collider.gameObject != gameObject) // Exclude the gun from collision check
+            {
+                // Adjust the target position to be just outside the sphere
+                targetPosition = player.position + direction.normalized * (hit.distance + 0.1f);
+            }
+        }
 
         return targetPosition;
     }
