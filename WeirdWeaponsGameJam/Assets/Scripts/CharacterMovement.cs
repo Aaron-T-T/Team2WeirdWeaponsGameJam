@@ -10,11 +10,15 @@ using UnityEngine;
 
 public class CharacterMovement : MonoBehaviour
 {
+    // Health variable
+    public int health = 100;
     //Public float variables that determines the characters speed, jump force, and fall force
     public float speed;
     public float jumpForce;
     public float fallForce;
-
+    // Variables to control the Pause menu First gameobject is the pauseMenu it self, next check if game is paused;
+    public GameObject pauseMenu;
+    public static bool gameIsPaused;
     // private Rigidbody
     private Rigidbody rigidBody;
 
@@ -26,39 +30,104 @@ public class CharacterMovement : MonoBehaviour
     {
         // Sets the private Rigidbody to the Rigidbody attached the the object
         rigidBody = GetComponent<Rigidbody>();
+        Cursor.lockState = CursorLockMode.None; // Ensures mouse isn't locked
     }
 
     // Update is called once per frame
     void Update()
     {
-        // If D is pushed then the character will translate forward
-        if (Input.GetKey(KeyCode.D))
+
+        if(health <= 0)
         {
-            transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            Debug.Log("Player dead");
         }
-
-        //If A is pushed then the character will translate backwards
-        if (Input.GetKey(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.Escape)) // If Escaped preseed pause game.
         {
-            transform.Translate(-1 * Vector3.forward * Time.deltaTime * speed);
+            gameIsPaused = !gameIsPaused;
+
+            PauseGame();
         }
-
-        // A raycast is sent below the object to see if it is touching the ground then that bool is assigned
-        isGrounded = Physics.Raycast(gameObject.transform.position, Vector3.down, 1f);
-
-        // If the spacebar is pushed and the pbject is on the ground, the object will jump
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+        if(!gameIsPaused) // If the game is unpaused the controls will behave normal
         {
-            rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            // If D is pushed then the character will translate forward
+            if (Input.GetKey(KeyCode.D))
+            {
+                transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            }
+
+            //If A is pushed then the character will translate backwards
+            if (Input.GetKey(KeyCode.A))
+            {
+                transform.Translate(-1 * Vector3.forward * Time.deltaTime * speed);
+            }
+
+            // A raycast is sent below the object to see if it is touching the ground then that bool is assigned
+            isGrounded = Physics.Raycast(gameObject.transform.position, Vector3.down, 1f);
+
+            // If the spacebar is pushed and the pbject is on the ground, the object will jump
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            }
+
+            // If the object is in the air then it will be pushed down so it falls faster
+            if (!isGrounded && rigidBody.velocity.y < 0f)
+            {
+                rigidBody.AddForce(Vector3.down * fallForce);
+            }
         }
+        else{ // If game is paused no Input will be acted upon
+            if (Input.GetKey(KeyCode.D))
+            {
+                //transform.Translate(Vector3.forward * Time.deltaTime * speed);
+            }
 
-        // If the object is in the air then it will be pushed down so it falls faster
-        if (!isGrounded && rigidBody.velocity.y < 0f)
-        {
-            rigidBody.AddForce(Vector3.down * fallForce);
+            //If A is pushed then the character will translate backwards
+            if (Input.GetKey(KeyCode.A))
+            {
+                //transform.Translate(-1 * Vector3.forward * Time.deltaTime * speed);
+            }
+
+            // A raycast is sent below the object to see if it is touching the ground then that bool is assigned
+            isGrounded = Physics.Raycast(gameObject.transform.position, Vector3.down, 1f);
+
+            // If the spacebar is pushed and the pbject is on the ground, the object will jump
+            if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
+            {
+                //rigidBody.AddForce(transform.up * jumpForce, ForceMode.Impulse);
+            }
+
+            // If the object is in the air then it will be pushed down so it falls faster
+            if (!isGrounded && rigidBody.velocity.y < 0f)
+            {
+                //rigidBody.AddForce(Vector3.down * fallForce);
+            }
         }
 
     }
+
+    public void PauseGame()
+    {
+        pauseMenu.SetActive(gameIsPaused); //display or undisplay pause menu
+        if(gameIsPaused)
+        {
+            Time.timeScale = 0f; // freezes time 
+            AudioListener.pause = true; // pause sound
+        }
+        else {
+            Time.timeScale = 1; // sets time back to normal scale
+            AudioListener.pause = false; // unpause sound
+        }
+
+    }
+
+    public void TakeDamage(int damage)
+    {
+        health -= damage;
+        Debug.Log($"Player health = {health}");
+ 
+    }
+
 
     
 }

@@ -8,8 +8,12 @@ public class GameManager : MonoBehaviour
     private bool ButtonClicked =  false;
     //private bool quitButtonClicked = false;
     //private bool settingButtonClicked = false;
-
+    private bool settingsOn = false;
+    private bool howToOn = false;
     private string sceneToLoad;
+    public GameObject settingsMenu;
+    public GameObject mainMenu;
+    public GameObject HowToMenu;
 
     void Update()
     {
@@ -42,5 +46,23 @@ public class GameManager : MonoBehaviour
     public void quitGame()
     {
         Application.Quit();
+    }
+    public void controlSettingsMenu()
+    {
+        settingsOn = !settingsOn;
+        settingsMenu.SetActive(settingsOn);
+        mainMenu.SetActive(!settingsOn);
+
+    }
+    public void controlHowToMenu()
+    {
+        howToOn = !howToOn;
+        HowToMenu.SetActive(howToOn);
+        mainMenu.SetActive(!howToOn);
+
+    }
+    public void loadChosenScene(string sceneName)
+    {
+        SceneManager.LoadScene(sceneName);
     }
 }
