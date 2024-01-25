@@ -12,6 +12,7 @@ public class EnemyDamage : MonoBehaviour
 
 
     public float health;
+    public AudioSource source;
 
 
     // Start is called before the first frame update
@@ -37,6 +38,7 @@ public class EnemyDamage : MonoBehaviour
         if (other.tag == "PlayerBullet")
         {
             health -= 1;
+            source.PlayOneShot(source.clip);
         }
     }
 }
