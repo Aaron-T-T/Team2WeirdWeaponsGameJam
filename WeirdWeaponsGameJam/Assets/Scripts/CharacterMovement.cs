@@ -25,12 +25,15 @@ public class CharacterMovement : MonoBehaviour
     //Bool to check if the object is on the ground
     private bool isGrounded;
 
+
+    public Animator anim;
     // Start is called before the first frame update
     void Start()
     {
         // Sets the private Rigidbody to the Rigidbody attached the the object
         rigidBody = GetComponent<Rigidbody>();
         Cursor.lockState = CursorLockMode.None; // Ensures mouse isn't locked
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,16 +56,35 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * speed);
+                transform.Rotate(0f, 90f, 0f);
+                anim.SetBool("Moving", true);
             }
-
+            else
+            {
+                anim.SetBool("Moving", false);
+            }
             //If A is pushed then the character will translate backwards
             if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(-1 * Vector3.forward * Time.deltaTime * speed);
+                transform.Rotate(0f, -90f, 0f);
+                anim.SetBool("Moving", true);
             }
-
+            else
+            {
+                anim.SetBool("Moving", false);
+            }
             // A raycast is sent below the object to see if it is touching the ground then that bool is assigned
             isGrounded = Physics.Raycast(gameObject.transform.position, Vector3.down, 1f);
+
+            if(isGrounded)
+            {
+                anim.SetBool("Jump", false);
+            }
+            else if (!isGrounded)
+            {
+                anim.SetBool("Jump", true);
+            }
 
             // If the spacebar is pushed and the pbject is on the ground, the object will jump
             if (Input.GetKeyDown(KeyCode.Space) && isGrounded)

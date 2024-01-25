@@ -29,6 +29,15 @@ public class PlayerHealth : MonoBehaviour
         
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyBullet")
+        {
+            healthBar.value -= 1;
+            source.PlayOneShot(source.clip);
+        }
+    }
+
     private void OnParticleCollision(GameObject other)
     {
         if (other.tag == "EnemyBullet")

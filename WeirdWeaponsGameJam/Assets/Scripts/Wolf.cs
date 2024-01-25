@@ -12,6 +12,7 @@ public class Wolf : MonoBehaviour
     public GameObject player;
     public ParticleSystem wolfBullet;
     public AudioSource source;
+    public GameObject meleeTrigger;
 
     public float patrolSpeed;
     public float chaseSpeed;
@@ -23,6 +24,7 @@ public class Wolf : MonoBehaviour
     private bool takingMelee = false;
     private int rand;
 
+    private Animator anim;
     private Vector3 startingPosition;
     private Vector3 patrolDirection = Vector3.forward;
     private ParticleSystem clonedBullet;
@@ -32,6 +34,7 @@ public class Wolf : MonoBehaviour
     {
         // When the program starts the wofs starting position is stored
         startingPosition = transform.position;
+        anim = gameObject.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -94,6 +97,7 @@ public class Wolf : MonoBehaviour
         {
             rand = Random.Range(1, 3);
             takingAction = true;
+            anim.SetBool("TakingAction", true);
         }
 
         // If the random number is 1 the wolf will preform a meelee attack
@@ -135,9 +139,14 @@ public class Wolf : MonoBehaviour
         // Attack animation is played and the program waits for two seconds before setting its bools to false to allow for another action to be taken
 
         //Would play attack animeation
-
+        anim.SetBool("IsMelee", true);
+        yield return new WaitForSeconds(0.5f);
+        meleeTrigger.SetActive(true);
         //The function waits for two seconds before setting its bools to false to allow for another action to be taken
         yield return new WaitForSeconds(2f);
+        anim.SetBool("IsMelee", false);
+        anim.SetBool("TakingAction", false);
+        meleeTrigger.SetActive(false);
         takingAction = false;
         takingMelee = false;
     }
@@ -147,13 +156,16 @@ public class Wolf : MonoBehaviour
         // A cloned particle effect is instantiated and played
         clonedBullet = Instantiate(wolfBullet, wolfBullet.transform.position, wolfBullet.transform.rotation);
         clonedBullet.Play();
-
+        anim.SetBool("IsShooting", true);
         //Audio clip is played
         source.PlayOneShot(source.clip);
 
         //The function waits before setting its bools to false
         yield return new WaitForSeconds(2f);
+        anim.SetBool("IsShooting", false);
+        anim.SetBool("TakingAction", false);
         takingShot = false;
         takingAction = false;
     }
+
 }
