@@ -50,16 +50,15 @@ public class CharacterMovement : MonoBehaviour
 
             PauseGame();
         }
-        if(!gameIsPaused) // If the game is unpaused the controls will behave normal
+        if (!gameIsPaused) // If the game is unpaused the controls will behave normal
         {
             // If D is pushed then the character will translate forward
             if (Input.GetKey(KeyCode.D))
             {
                 transform.Translate(Vector3.forward * Time.deltaTime * speed);
-                transform.Rotate(0f, 90f, 0f);
                 anim.SetBool("Moving", true);
             }
-            else
+            else if (Input.GetKeyUp(KeyCode.D))
             {
                 anim.SetBool("Moving", false);
             }
@@ -67,10 +66,9 @@ public class CharacterMovement : MonoBehaviour
             if (Input.GetKey(KeyCode.A))
             {
                 transform.Translate(-1 * Vector3.forward * Time.deltaTime * speed);
-                transform.Rotate(0f, -90f, 0f);
                 anim.SetBool("Moving", true);
             }
-            else
+            else if (Input.GetKeyUp(KeyCode.A))
             {
                 anim.SetBool("Moving", false);
             }
