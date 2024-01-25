@@ -4,6 +4,7 @@ using System.Collections;
 
 public class FlyingEnemy : MonoBehaviour
 {
+    public AudioSource source;
     public float patrolSpeed = 5f;
     public float chaseSpeed = 10f;
     public float minChaseDistance = 2f; // Minimum distance to maintain during chase
@@ -134,6 +135,7 @@ public class FlyingEnemy : MonoBehaviour
         // Add force to the bullet in the calculated direction towards the player
         Rigidbody bulletRb = bullet.GetComponent<Rigidbody>();
         bulletRb.velocity = direction * bulletSpeed;
+        source.PlayOneShot(source.clip);
 
         // Destroy the bullet after a certain time (adjust as needed)
         Destroy(bullet, 1.0f);
