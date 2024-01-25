@@ -11,6 +11,7 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
 
+    public AudioSource source;
     // A private variable that will hold a cloned game object and its particle system
     private GameObject shotBullet;
     private ParticleSystem shotBulletParticle;
@@ -37,6 +38,7 @@ public class PlayerShoot : MonoBehaviour
 
             // The particle effect is played
             shotBulletParticle.Play();
+            source.PlayOneShot(source.clip);
 
             //The cloned game objects script is destroyed to prevent it from cloning itself further
             Destroy(shotBullet.GetComponent<PlayerShoot>());
