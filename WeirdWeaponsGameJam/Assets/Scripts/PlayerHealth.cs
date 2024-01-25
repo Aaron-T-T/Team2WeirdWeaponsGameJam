@@ -26,6 +26,7 @@ public class PlayerHealth : MonoBehaviour
             healthBar.value -= 1;
             source.PlayOneShot(source.clip);
         }
+        
     }
 
     private void OnParticleCollision(GameObject other)

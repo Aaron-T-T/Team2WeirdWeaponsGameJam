@@ -64,9 +64,11 @@ public class ArmGunController : MonoBehaviour
         lookDirection.z = 0f;
         //lookDirection.y = 0f;
 
-
-        // Smoothly rotate the gun to face the mouse cursor
-        Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        if (lookDirection.magnitude > 0.001f)
+        {
+            // Smoothly rotate the gun to face the mouse cursor
+            Quaternion targetRotation = Quaternion.LookRotation(lookDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+        }
     }   
 }

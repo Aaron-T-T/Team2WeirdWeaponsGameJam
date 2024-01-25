@@ -121,8 +121,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e7170151ae8aa41b6ea1e7d5f3a0d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
-  rotationSpeed: 5
+  moveSpeed: 10
+  rotationSpeed: 20
   player: {fileID: 1600836512707869781}
 --- !u!1 &3592149039931762364
 GameObject:
@@ -136,7 +136,7 @@ GameObject:
   - component: {fileID: 9078533940445734593}
   - component: {fileID: 5046609175987800278}
   - component: {fileID: 2334300310035615072}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -277,7 +277,7 @@ GameObject:
   - component: {fileID: 7020550264540941843}
   - component: {fileID: 2389130690151812285}
   - component: {fileID: 8871612835902342599}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -453,6 +453,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  source: {fileID: 0}
 --- !u!1 &7375874893937709885
 GameObject:
   m_ObjectHideFlags: 0

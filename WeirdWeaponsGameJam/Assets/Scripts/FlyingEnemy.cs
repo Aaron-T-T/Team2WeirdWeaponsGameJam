@@ -7,7 +7,7 @@ public class FlyingEnemy : MonoBehaviour
     public AudioSource source;
     public float patrolSpeed = 5f;
     public float chaseSpeed = 10f;
-    public float minChaseDistance = 2f; // Minimum distance to maintain during chase
+    public float patrolDistance;
     public float stopChaseDistance = 1f; // Distance to stop chasing the player
     public float spottingDelay = 1.5f; // Delay before the enemy starts chasing
     public GameObject bulletPrefab; // Reference to the bullet prefab
@@ -16,7 +16,8 @@ public class FlyingEnemy : MonoBehaviour
     private bool canShoot = true;
     private Transform player;
     private bool isChasing = false;
-    private Vector3 patrolDirection = Vector3.right;
+    private Vector3 startingPosition;
+    private Vector3 patrolDirection = Vector3.forward;
     private SphereCollider detectionCollider; // Sphere collider detects player
     private GameObject shotBullet;
     private ParticleSystem shotBulletParticle;
@@ -25,6 +26,7 @@ public class FlyingEnemy : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         detectionCollider = GetComponent<SphereCollider>();
+        startingPosition = transform.position;
 
         // Start the spotting coroutine
         StartCoroutine(SpottingCoroutine());
@@ -34,17 +36,17 @@ public class FlyingEnemy : MonoBehaviour
     {
         yield return new WaitForSeconds(spottingDelay);
 
-        // The delay has passed, now the enemy can start chasing
-        isChasing = true;
+        
     }
 
     void Update()
     {
+        Debug.Log(isChasing);
         if (!isChasing)
         {
             Patrol();
         }
-        else
+        if(isChasing)
         {
             ChaseAndShoot();
         }
@@ -52,6 +54,7 @@ public class FlyingEnemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
+        //Debug.Log("Racoon detected something: " + other.name);
         // Check if the entering collider has the "Player" tag
         if (other.CompareTag("Player"))
         {
@@ -64,6 +67,7 @@ public class FlyingEnemy : MonoBehaviour
 
     void OnTriggerExit(Collider other)
     {
+        //Debug.Log("Racoon lost sight of something: " + other.name);
         // Check if the exiting collider has the "Player" tag
         if (other.CompareTag("Player"))
         {
@@ -73,24 +77,27 @@ public class FlyingEnemy : MonoBehaviour
 
     void Patrol()
     {
-        // Implement patrolling behavior (move back and forth)
-        transform.Translate(patrolDirection * patrolSpeed * Time.deltaTime);
+        //Debug.Log("Racoon is patroling");
+        transform.Translate(patrolDirection * patrolSpeed * Time.deltaTime, Space.Self);
 
-        // Check if patrol boundaries are reached
-        if (transform.localPosition.x > 5f)
+        //If it is a certain distance from its starting position in wither direction then it will turn around and move in the opposite direction
+        if(transform.localPosition.x > startingPosition.x + patrolDistance)
+
         {
-            // Reached right boundary, switch direction
-            patrolDirection = Vector3.left;
+            transform.Rotate(0f, -180f, 0f);
+            
+            
         }
-        else if (transform.localPosition.x < -5f)
+        else if (transform.localPosition.x < startingPosition.x -patrolDistance)
         {
-            // Reached left boundary, switch direction
-            patrolDirection = Vector3.right;
+            transform.Rotate(0f, 180f, 0f);
+           
         }
     }
 
     void ChaseAndShoot()
     {
+        //Debug.Log("Raccoon is chasing and shooting");
         // Calculate direction to the player
         Vector3 directionToPlayer = (new Vector3(player.position.x, player.position.y, 0) - new Vector3(transform.position.x, transform.position.y, 0)).normalized;
 
@@ -108,10 +115,6 @@ public class FlyingEnemy : MonoBehaviour
         {
                 StartCoroutine(ShootWithDelay(directionToPlayer));
         }
-
-        // Implement shooting behavior
-        
-       
     }
     IEnumerator ShootWithDelay(Vector3 direction)
     {
