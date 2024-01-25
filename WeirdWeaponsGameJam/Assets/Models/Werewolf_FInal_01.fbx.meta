@@ -3,7 +3,47 @@ guid: a7795987f9ef6d14caf65790bcc22e3f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Base_MAT
+    second: {fileID: 2100000, guid: 210dd31ab6fd63841ab514865360d438, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Body_MAT
+    second: {fileID: 2100000, guid: e9ecdec2c7fc0f949b4ded822c560339, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Guard_MAT
+    second: {fileID: 2100000, guid: 73ea411766f475b4399520168f6e625c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Left_Barrel_MAT
+    second: {fileID: 2100000, guid: d4fbd186186de724195f9c8d6c74f50e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Left_Ear_MAT
+    second: {fileID: 2100000, guid: 3a130fcb4f985314380abb2ab34d4ee1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Right_Barrel_MAT
+    second: {fileID: 2100000, guid: 57225c73e8e697f46b61d254ef2319dd, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Right_Ear_MAT
+    second: {fileID: 2100000, guid: 8a447d275474c3b4089147cc0d0a2f1d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Trigger_MAT
+    second: {fileID: 2100000, guid: 20c6423fd55ca1948acda08a0f4cd857, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -99,7 +139,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

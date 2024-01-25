@@ -1,9 +1,15 @@
 fileFormatVersion: 2
-guid: 8130dae5deb058d42b3a2cc0d81fede7
+guid: 2ece88aaca9e4f64787904d5d5af3adc
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Convict_Texture
+    second: {fileID: 1336625107017483121, guid: 3e2c3039edc368d49aeeabd29c034002,
+      type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -99,7 +105,7 @@ ModelImporter:
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 2
   humanoidOversampling: 1
-  avatarSetup: 0
+  avatarSetup: 1
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
   importBlendShapeDeformPercent: 1
   remapMaterialsIfMaterialImportModeIsNone: 0

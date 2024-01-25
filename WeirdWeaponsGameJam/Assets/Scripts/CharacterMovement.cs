@@ -26,7 +26,7 @@ public class CharacterMovement : MonoBehaviour
     private bool isGrounded;
 
 
-    public Animator anim;
+    private Animator anim;
     // Start is called before the first frame update
     void Start()
     {
