@@ -144,11 +144,11 @@ public class FlyingEnemy : MonoBehaviour
     }
     void ShootBullet(Vector3 direction)
     {
-        shotBulletParticle = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        shotBulletParticle = Instantiate(bulletPrefab, bulletPrefab.transform.position, bulletPrefab.transform.rotation);
         
         // Get the ParticleSystem component from the instantiated particle system
         var main = shotBulletParticle.main;
-        main.stopAction = ParticleSystemStopAction.Destroy;
+     //   main.stopAction = ParticleSystemStopAction.Destroy;
         shotBulletParticle.Play();
         // The particle effect is played
         
