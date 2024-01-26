@@ -41,7 +41,7 @@ public class FlyingEnemy : MonoBehaviour
 
     void Update()
     {
-        Debug.Log("Position: " + transform.position);
+       
         
         //Debug.Log(isChasing);
         if (!isChasing)
@@ -104,7 +104,7 @@ public class FlyingEnemy : MonoBehaviour
         // Calculate direction to the player
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
 
-        Debug.Log("Direction: " + directionToPlayer);
+       
         float dotProduct = Vector3.Dot(transform.forward, directionToPlayer);
 
         if (dotProduct < 0)

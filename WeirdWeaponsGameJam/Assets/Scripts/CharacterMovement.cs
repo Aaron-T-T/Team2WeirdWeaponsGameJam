@@ -11,7 +11,7 @@ using UnityEngine;
 public class CharacterMovement : MonoBehaviour
 {
     // Health variable
-    public int health = 100;
+    public int health = 50;
     //Public float variables that determines the characters speed, jump force, and fall force
     public float speed;
     public float jumpForce;
