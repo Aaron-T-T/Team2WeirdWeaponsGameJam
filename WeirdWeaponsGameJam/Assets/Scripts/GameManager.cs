@@ -67,8 +67,7 @@ public class GameManager : MonoBehaviour
     {
         creditsOn = !creditsOn;
         CreditsMenu.SetActive(creditsOn);
-        mainMenu.SetActive(!creditsOn);
-            
+        mainMenu.SetActive(!creditsOn);   
     }
     public void loadChosenScene(string sceneName)
     {

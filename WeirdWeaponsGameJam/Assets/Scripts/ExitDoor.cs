@@ -11,6 +11,7 @@ public class ExitDoor : MonoBehaviour
     {
         if(other.CompareTag("Player"))
         {
+            Destroy(other);
             SceneManager.LoadScene(sceneToLoad); 
         }
     }

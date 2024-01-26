@@ -8,7 +8,11 @@ public class ArmGunController : MonoBehaviour
     public float moveSpeed = 5f;
     public float rotationSpeed = 5f;
     public Transform player; // Reference to the player GameObject with the sphere collider
+    void start()
+    {
+        transform.position = player.position;
 
+    }
     void Update()
     {
         // Get the mouse position in screen space
@@ -22,7 +26,7 @@ public class ArmGunController : MonoBehaviour
         targetPosition.z = transform.position.z;
 
         // Constrain the target position within the sphere around the player
-        targetPosition = ConstrainToSphere(targetPosition);
+        //targetPosition = ConstrainToSphere(targetPosition);
 
         // Move the gun to the constrained target position in the X and Y axes
         MoveToTarget(targetPosition);
