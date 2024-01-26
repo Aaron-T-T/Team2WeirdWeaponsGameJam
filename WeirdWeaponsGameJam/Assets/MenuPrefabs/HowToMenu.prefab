@@ -426,7 +426,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &7807581368807792546
 RectTransform:
   m_ObjectHideFlags: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Strafe Left (A)
 
-    Strafe Right (B)
+    Strafe Right (D)
 
     Jump (Space)
 
