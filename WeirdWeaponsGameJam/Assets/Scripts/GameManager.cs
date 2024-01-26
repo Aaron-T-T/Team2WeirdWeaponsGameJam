@@ -10,10 +10,12 @@ public class GameManager : MonoBehaviour
     //private bool settingButtonClicked = false;
     private bool settingsOn = false;
     private bool howToOn = false;
+    private bool creditsOn = false;
     private string sceneToLoad;
     public GameObject settingsMenu;
     public GameObject mainMenu;
     public GameObject HowToMenu;
+    public GameObject CreditsMenu;
 
     void Update()
     {
@@ -60,6 +62,13 @@ public class GameManager : MonoBehaviour
         HowToMenu.SetActive(howToOn);
         mainMenu.SetActive(!howToOn);
 
+    }
+    public void controlCredits()
+    {
+        creditsOn = !creditsOn;
+        CreditsMenu.SetActive(creditsOn);
+        mainMenu.SetActive(!creditsOn);
+            
     }
     public void loadChosenScene(string sceneName)
     {
