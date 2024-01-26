@@ -36,12 +36,14 @@ public class PlayerShoot : MonoBehaviour
             var main = shotBulletParticle.main;
             main.stopAction = ParticleSystemStopAction.Destroy;
 
+            //The cloned game objects script is destroyed to prevent it from cloning itself further
+            Destroy(shotBullet.GetComponent<PlayerShoot>());
+
             // The particle effect is played
             shotBulletParticle.Play();
             source.PlayOneShot(source.clip);
 
-            //The cloned game objects script is destroyed to prevent it from cloning itself further
-            Destroy(shotBullet.GetComponent<PlayerShoot>());
+            
             
         }
     }

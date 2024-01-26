@@ -47,7 +47,7 @@ GameObject:
   - component: {fileID: 6033949503350667618}
   - component: {fileID: 2333854542194701918}
   m_Layer: 0
-  m_Name: EnemyHurtSFX
+  m_Name: PlayerHurtSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -208,7 +208,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d3ed223291959124bb5455d7d7b8cfd0, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.52
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -303,7 +303,7 @@ GameObject:
   - component: {fileID: 2590300007131125770}
   - component: {fileID: 8114437864075479042}
   m_Layer: 0
-  m_Name: HurtSFX
+  m_Name: EnemyHurtSFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
